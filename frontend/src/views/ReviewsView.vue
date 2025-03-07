@@ -39,6 +39,11 @@
 
         <!-- 操作按钮区 -->
         <div class="action-bar">
+            <el-button type="primary" @click="openAddReviewDialog">
+                <el-icon>
+                    <Plus />
+                </el-icon> 添加评价记录
+            </el-button>
             <el-button type="success" @click="batchCertify" :disabled="selectedReviews.length === 0">
                 <el-icon>
                     <Lock />
@@ -50,7 +55,44 @@
                 </el-icon> 导出数据
             </el-button>
         </div>
-
+        <!-- 添加评价记录的对话框 -->
+        <el-dialog title="添加评价记录" v-model="isAddReviewDialogVisible" width="600px">
+            <el-form :model="newReview">
+                <el-form-item label="评价对象" :label-width="formLabelWidth">
+                    <el-select v-model="newReview.type" placeholder="请选择评价对象">
+                        <el-option label="正面" value="positive"></el-option>
+                        <el-option label="中立" value="neutral"></el-option>
+                        <el-option label="负面" value="negative"></el-option>
+                    </el-select>
+                </el-form-item>
+                <el-form-item label="评价内容" :label-width="formLabelWidth">
+                    <el-input type="textarea" v-model="newReview.content" placeholder="请输入评价内容"></el-input>
+                </el-form-item>
+                <el-form-item label="评分" :label-width="formLabelWidth">
+                    <el-rate v-model="newReview.rating" :allow-half="true" />
+                </el-form-item>                
+                <el-form-item label="附加文件" :label-width="formLabelWidth">
+                    <el-upload
+                        class="upload-demo"
+                        drag
+                        action="#"
+                        :on-change="handleFileChange"
+                        :file-list="newReview.files"
+                        multiple
+                    >
+                        <i class="el-icon-upload"></i>
+                        <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+                        <div class="el-upload__tip" slot="tip">只能上传 JPG/PNG 文件，且不超过 2MB</div>
+                    </el-upload>
+                </el-form-item>
+            </el-form>
+            <template #footer>
+            <div  class="dialog-footer">
+                <el-button @click="isAddReviewDialogVisible = false">取 消</el-button>
+                <el-button type="primary" @click="addReview">确 定</el-button>
+            </div>
+        </template>
+        </el-dialog>
         <!-- 评价列表 -->
         <div class="reviews-list card">
             <el-table :data="paginatedReviews" border style="width: 100%" @selection-change="handleSelectionChange"
@@ -172,7 +214,7 @@
 <script setup>
 import { ref, reactive, computed, onMounted } from 'vue';
 import {
-    Lock, Download, Check, Link, DocumentCopy, View
+    Plus, Lock, Download, Check, Link, DocumentCopy, View
 } from '@element-plus/icons-vue';
 import { ElMessage, ElMessageBox } from 'element-plus';
 
@@ -575,6 +617,41 @@ const viewBlockExplorer = () => {
     window.open(`https://example-blockchain-explorer.com/tx/${currentCertification.value.hash}`, '_blank');
 };
 
+// 添加评价记录
+const isAddReviewDialogVisible = ref(false);
+const newReview = ref({
+    content: '',
+    rating: 0,
+    type: '',
+    files: []
+});
+const formLabelWidth = ref('100px');
+
+const openAddReviewDialog = () => {
+    isAddReviewDialogVisible.value = true;
+    newReview.value.content = '';
+    newReview.value.rating = 0;
+    newReview.value.type = '';
+    newReview.value.files = [];
+};
+
+const addReview = () => {
+    if (newReview.value.content.trim() === '') {
+        ElMessage.error('评价内容不能为空');
+        return;
+    }
+
+    // 在这里添加逻辑将新评价记录保存到数据源
+    // 例如，调用 API 或更新本地状态
+
+    ElMessage.success('评价记录添加成功');
+    isAddReviewDialogVisible.value = false;
+};
+
+const handleFileChange = (fileList) => {
+    newReview.value.files = fileList;
+};
+
 onMounted(() => {
     // 模拟加载数据
     loading.value = true;
@@ -582,6 +659,7 @@ onMounted(() => {
         loading.value = false;
     }, 1000);
 });
+
 </script>
 
 <style scoped>

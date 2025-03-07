@@ -31,7 +31,7 @@
             <el-button type="primary" @click="showAddProductDialog">
                 <el-icon>
                     <Plus />
-                </el-icon> 添加新产品
+                </el-icon> 添加土特品交易记录
             </el-button>
             <el-button type="success" @click="batchCertify" :disabled="selectedProducts.length === 0">
                 <el-icon>
