@@ -25,8 +25,8 @@
             <LineChart :data="chartData" :options="chartOptions" />
         </div>
         <div class="chart-div">
-            <h2>近7天数据趋势</h2>
-            <LineChart :data="chartData" :options="chartOptions" />
+            <h2>近7天告警数据</h2>
+            <LineChart :data="warningData" :options="warningOptions" />
         </div>        
     </div>
     </div>
@@ -124,6 +124,39 @@ export default {
                     }
                 }
             },
+            warningData: {
+                datasets: [
+                    {
+                        label: '评价告警',
+                        data: [{x: '2025-02-28', y: 2},{x: '2025-03-01', y: 5},{x: '2025-03-02', y: 4},{x: '2025-03-03', y: 0},{x: '2025-03-04', y: 2},{x: '2025-03-05', y: 3},{x: '2025-03-06', y: 0}],
+                        borderColor: '#ff4757',
+                        tension: 0.1,
+                        fill: false
+                    },
+                ]
+            },
+            warningOptions: {
+                responsive: true,
+                scales: {
+                    x: {
+                        type: 'time',
+                        time: {
+                            unit: 'day',
+                            tooltipFormat: 'yyyy-MM-dd'
+                        },
+                        title: {
+                            display: true,
+                            text: '日期'
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: '数量'
+                        }
+                    }
+                }
+            },
             pieChartData: {
                 labels: ['景区服务部门节点', '景区商家节点', '景区监管部门节点'], // 根据需要调整标签
                 datasets: [
@@ -144,15 +177,17 @@ export default {
                     tooltip: {
                         callbacks: {
                             label: function(tooltipItem) {
-                            return tooltipItem.label + ': ' + tooltipItem.raw;
+                            return tooltipItem.raw;
                             }
                         }
                     },
                     datalabels: {
                         color: '#fff', // 数据标签的颜色
                         formatter: (value, context) => {
-                        return value; // 显示数据值
-                        }
+                        return value.y; // 显示数据值
+                        },
+                        anchor: 'end', // 数据标签的位置
+                        align: 'end' // 数据标签的对齐方式
                     }
                 }
             }
@@ -304,13 +339,14 @@ export default {
 .chart-container {
     margin-top: 20px;
     display: flex;
-    align-items:between;
+    /* justify-content:space-between; */
     width: 100%;
 }
 
 .chart-div{
     width: 600px;
     height: auto;
+    padding-left: 40px;
 }
 
 .pie-chart-container {
