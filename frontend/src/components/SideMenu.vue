@@ -14,21 +14,21 @@
                 <el-icon>
                     <Tickets />
                 </el-icon>
-                <span>门票记录存证</span>
+                <span>门票管理</span>
             </el-menu-item>
 
             <el-menu-item index="/home/products">
                 <el-icon>
                     <ShoppingBag />
                 </el-icon>
-                <span>土特品交易存证</span>
+                <span>产品管理</span>
             </el-menu-item>
 
             <el-menu-item index="/home/reviews">
                 <el-icon>
                     <ChatDotRound />
                 </el-icon>
-                <span>评价记录存证</span>
+                <span>评价管理</span>
             </el-menu-item>
 
             <!-- 节点用户专属菜单 -->
@@ -85,7 +85,7 @@ const activeRoute = computed(() => {
 
 .el-menu {
     border-right: none;
-    height: 100%;
+    height: auto;
    
 }
 .el-menu-item {

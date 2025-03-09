@@ -377,7 +377,7 @@ const productRules = {
 
 // 区块链存证信息
 const certificationDialogVisible = ref(false);
-const currentCertification = ref(null);
+let currentCertification = ref(null);
 
 // 表格选择
 const handleSelectionChange = (selection) => {

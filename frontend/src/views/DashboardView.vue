@@ -1,34 +1,39 @@
 <template>
     <div class="dashboards">
         <h1 class="page-title">总览大屏</h1>
-        <div class="data-cards">
-      <div class="card">
-        <h2>当前区块链节点</h2>
-        <p>{{ currentData.blockchainNodes }}</p>
+    <div class="data-cards">
+      <div class="pie-chart-container">
+        <PieChart :data="pieChartData" :options="pieChartOptions" />
       </div>
       <div class="card">
-        <h2>当前门票存证</h2>
+        <h2>当前门票存证数</h2>
         <p>{{ currentData.ticketCertificates }}</p>
       </div>
       <div class="card">
-        <h2>当前商品交易存证</h2>
+        <h2>当前交易存证数</h2>
         <p>{{ currentData.productTransactions }}</p>
       </div>
       <div class="card">
-        <h2>当前评价记录</h2>
+        <h2>当前评价存证数</h2>
         <p>{{ currentData.reviewRecords }}</p>
       </div>
     </div>
     <div v-if="warningMessage" class="warning">{{ warningMessage }}</div>
     <div class="chart-container">
-      <h2>近7天数据趋势</h2>
-      <LineChart :data="chartData" :options="chartOptions" />
+        <div class="chart-div">
+            <h2>近7天数据趋势</h2>
+            <LineChart :data="chartData" :options="chartOptions" />
+        </div>
+        <div class="chart-div">
+            <h2>近7天数据趋势</h2>
+            <LineChart :data="chartData" :options="chartOptions" />
+        </div>        
     </div>
     </div>
 </template>
 
 <script>
-import { Line } from 'vue-chartjs'
+import { Line, Pie } from 'vue-chartjs'
 import {
     Chart as ChartJS,
     Title,
@@ -36,11 +41,14 @@ import {
     Legend,
     LineElement,
     PointElement,
+    ArcElement, // 确保导入 ArcElement
     CategoryScale,
     LinearScale,
     TimeScale
-} from 'chart.js'
-import 'chartjs-adapter-date-fns'
+} from 'chart.js';
+import 'chartjs-adapter-date-fns';
+import ChartDataLabels from 'chartjs-plugin-datalabels'; // 导入数据标签插件
+import * as echarts from 'echarts'; // 对于 echarts
 
 ChartJS.register(
     Title,
@@ -48,19 +56,22 @@ ChartJS.register(
     Legend,
     LineElement,
     PointElement,
+    ArcElement, // 注册 ArcElement
     CategoryScale,
     LinearScale,
-    TimeScale
+    TimeScale,
+    ChartDataLabels // 注册数据标签插件
 )
 
 export default {
     components: {
-        LineChart: Line
+        LineChart: Line,
+        PieChart: Pie
     },
     data() {
         return {
             currentData: {
-                blockchainNodes: 0,
+                blockchainNodes: 5,
                 ticketCertificates: 0,
                 productTransactions: 0,
                 reviewRecords: 0
@@ -76,14 +87,14 @@ export default {
                         fill: false
                     },
                     {
-                        label: '商品交易',
+                        label: '交易存证',
                         data: [{x: '2025-02-28', y: 231},{x: '2025-03-01', y: 139},{x: '2025-03-02', y: 148},{x: '2025-03-03', y: 132},{x: '2025-03-04', y: 133},{x: '2025-03-05', y: 397},{x: '2025-03-06', y: 171}],
                         borderColor: '#4BC0C0',
                         tension: 0.1,
                         fill: false
                     },
                     {
-                        label: '评价记录',
+                        label: '评价存证',
                         data: [{x: '2025-02-28', y: 344},{x: '2025-03-01', y: 159},{x: '2025-03-02', y: 178},{x: '2025-03-03', y: 132},{x: '2025-03-04', y: 183},{x: '2025-03-05', y: 497},{x: '2025-03-06', y: 271}],
                         borderColor: '#FFCE56',
                         tension: 0.1,
@@ -109,6 +120,38 @@ export default {
                         title: {
                             display: true,
                             text: '数量'
+                        }
+                    }
+                }
+            },
+            pieChartData: {
+                labels: ['景区服务部门节点', '景区商家节点', '景区监管部门节点'], // 根据需要调整标签
+                datasets: [
+                    {
+                        label: '区块链节点分布',
+                        data: [5,10,4], // 示例数据
+                        backgroundColor: ['#36A2EB', '#FF6384','#fab82ad4'], // 饼图颜色
+                        hoverOffset: 4
+                    }
+                ]
+            },
+            pieChartOptions: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(tooltipItem) {
+                            return tooltipItem.label + ': ' + tooltipItem.raw;
+                            }
+                        }
+                    },
+                    datalabels: {
+                        color: '#fff', // 数据标签的颜色
+                        formatter: (value, context) => {
+                        return value; // 显示数据值
                         }
                     }
                 }
@@ -168,7 +211,7 @@ export default {
             // 获取最新数据
             const lastIndex = fakeData.length - 1;
             this.currentData = {
-                blockchainNodes: 0, // 假设区块链节点数据为0
+                blockchainNodes: 5, // 假设区块链节点数据为0
                 ticketCertificates: fakeData[lastIndex].ticketCertificates,
                 productTransactions: fakeData[lastIndex].productTransactions,
                 reviewRecords: fakeData[lastIndex].reviewRecords
@@ -196,12 +239,23 @@ export default {
             }
 
             this.warningMessage = messages.join('，');
-        }
+        },
+        updatePieChartData() {
+        this.pieChartData.datasets[0].data = [5,14,4];
+    }
     },
     mounted() {
         this.updateChartData();
         console.log(this.chartData);
-    }
+        this.updatePieChartData(); // 更新饼图数据
+    },
+    watch: {
+    // 监视 currentData.blockchainNodes 的变化以更新饼图数据
+        'currentData.blockchainNodes': function() {
+        this.updatePieChartData();
+        }
+    },
+    
 }
 </script>
 
@@ -223,7 +277,7 @@ export default {
 
 .data-cards {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 20px;
   margin-bottom: 20px;
 }
@@ -235,6 +289,7 @@ export default {
   padding: 15px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   text-align: center;
+  height: 100px;  
 }
 
 .warning {
@@ -247,6 +302,26 @@ export default {
 }
 
 .chart-container {
-  margin-top: 20px;
+    margin-top: 20px;
+    display: flex;
+    align-items:between;
+    width: 100%;
+}
+
+.chart-div{
+    width: 600px;
+    height: auto;
+}
+
+.pie-chart-container {
+  width: 100%; /* 设置饼图容器宽度 */
+  height: 220px; /* 设置饼图容器高度 */
+  display: flex; /* 使用 Flexbox 布局 */
+  justify-content: center; /* 水平居中 */
+  align-items: center; /* 垂直居中 */
+  background-color: #f9f9f9; /* 背景颜色 */
+  border-radius: 8px; /* 圆角 */
+  padding: 20px; /* 内边距 */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 阴影效果 */
 }
 </style>
