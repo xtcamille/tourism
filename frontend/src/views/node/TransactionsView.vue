@@ -22,8 +22,8 @@ import { ref } from 'vue';
 
 const transactions = ref([
     // 示例交易数据
-    { id: '1', type: '产品交易', status: '待审核', timestamp: '2023-05-01 10:00:00' },
-    { id: '2', type: '门票交易', status: '已审核', timestamp: '2023-05-02 11:00:00' },
+    { id: '1', type: '产品交易', status: '待审核', timestamp: '2025-04-01 10:00:00' },
+    { id: '2', type: '门票交易', status: '已审核', timestamp: '2025-04-02 11:00:00' },
 ]);
 
 const viewTransaction = (transaction) => {

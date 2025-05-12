@@ -25,10 +25,12 @@ export const useUserStore = defineStore('user', {
             this.error = null;
 
             try {
+                console.log("credentials:", credentials)
                 const response = await axios.post('/api/login', credentials);
+
                 this.token = response.data.token;
                 this.user = response.data.user;
-
+                console.log("response:", credentials)
                 // 保存token到本地存储
                 localStorage.setItem('token', this.token);
 

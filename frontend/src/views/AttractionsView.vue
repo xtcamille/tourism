@@ -131,7 +131,7 @@ const attractions = ref([
         verificationInfo: {
             hash: '0x8f5b785d732c5add0eba3c80fc37d20ebc7988a19c9b6180d59c3e2d7272fa21',
             blockNumber: 1256789,
-            timestamp: '2023-05-15 14:30:22',
+            timestamp: '2025-03-15 14:30:22',
             validator: '节点3',
             dataFingerprint: 'QmW2WQi7j6c7UgJTarActp7tDNikE4B2qXtFCfLPdsgG12'
         }
@@ -148,7 +148,7 @@ const attractions = ref([
         verificationInfo: {
             hash: '0x3c7b2c2150a48b5b9ff252f498ee08065287ed87f4947e9a3d9764d8873dd233',
             blockNumber: 1256787,
-            timestamp: '2023-05-18 09:45:11',
+            timestamp: '2025-02-18 09:45:11',
             validator: '节点1',
             dataFingerprint: 'QmT8CeWdN43qrthZnxaTmBHKqjmLnJgS8Bp9ZJFRQAGWgP'
         }
@@ -175,7 +175,7 @@ const attractions = ref([
         verificationInfo: {
             hash: '0x1d8f88ae3bdf736c072a9b4dcda680f92a4f0612a4bed70c593f5adb8d5251af',
             blockNumber: 1256786,
-            timestamp: '2023-05-20 16:20:35',
+            timestamp: '2025-02-20 16:20:35',
             validator: '节点2',
             dataFingerprint: 'QmNLei78zWmzUdbeRB3CiUfAizWUrbeeZh5K1rhAQKCh51'
         }
@@ -202,7 +202,7 @@ const attractions = ref([
         verificationInfo: {
             hash: '0xe56c2f9e5d937cbb231925c7da5399b58f97ef09bca676d2e95770559c0a7764',
             blockNumber: 1256785,
-            timestamp: '2023-05-22 10:15:47',
+            timestamp: '2025-03-22 10:15:47',
             validator: '节点5',
             dataFingerprint: 'QmPK1s3pNYLi9ERiq3BDxKa4XosgWwFRQUydHUtz4YgpqB'
         }
@@ -229,7 +229,7 @@ const attractions = ref([
         verificationInfo: {
             hash: '0x6a98b2e0ccd139342a38d9b423ccf8eb790bbc7950f0e429018b2c5d752504c0',
             blockNumber: 1256788,
-            timestamp: '2023-05-24 13:40:18',
+            timestamp: '2025-03-24 13:40:18',
             validator: '节点4',
             dataFingerprint: 'QmZF1ytCBXXJgCnALR23NeJRLhVNGN7YQPk2QZtE1nz6Cv'
         }

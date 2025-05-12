@@ -54,6 +54,11 @@
                     <Download />
                 </el-icon> 导出数据
             </el-button>
+            <el-button type="info" @click="openImportReviewDialog">
+                <el-icon>
+                    <Upload />
+                </el-icon> 导入外部评价
+            </el-button>
         </div>
         <!-- 添加评价记录的对话框 -->
         <el-dialog title="添加评价记录" v-model="isAddReviewDialogVisible" width="600px">
@@ -92,6 +97,33 @@
                 <el-button type="primary" @click="addReview">确 定</el-button>
             </div>
         </template>
+        </el-dialog>
+        <!-- 导入外部评价的对话框 -->
+        <el-dialog title="导入外部评价" v-model="isImportReviewDialogVisible" width="600px">
+            <el-form :model="importReview" ref="importReviewForm">
+                <el-form-item label="评价类型" :label-width="formLabelWidth">
+                    <el-select v-model="importReview.type" placeholder="请选择评价类型">
+                        <el-option label="景点评价" value="attraction" />
+                        <el-option label="产品评价" value="product" />
+                        <el-option label="服务评价" value="service" />
+                    </el-select>
+                </el-form-item>
+                <el-form-item label="评价链接" :label-width="formLabelWidth">
+                    <el-input v-model="importReview.link" placeholder="请输入评价链接"></el-input>
+                </el-form-item>
+                <el-form-item label="解析评价内容" :label-width="formLabelWidth">
+                    <el-input type="textarea" v-model="importReview.content" placeholder="请输入解析的评价内容"></el-input>
+                </el-form-item>
+                <el-form-item label="评分" :label-width="formLabelWidth">
+                    <el-rate v-model="importReview.rating" :allow-half="true" />
+                </el-form-item>
+            </el-form>
+            <template #footer>
+                <div class="dialog-footer">
+                    <el-button @click="isImportReviewDialogVisible = false">取 消</el-button>
+                    <el-button type="primary" @click="importReviewData">确 定</el-button>
+                </div>
+            </template>
         </el-dialog>
         <!-- 评价列表 -->
         <div class="reviews-list card">
@@ -214,7 +246,7 @@
 <script setup>
 import { ref, reactive, computed, onMounted } from 'vue';
 import {
-    Plus, Lock, Download, Check, Link, DocumentCopy, View
+    Plus, Lock, Download, Check, Link, DocumentCopy, View, Upload
 } from '@element-plus/icons-vue';
 import { ElMessage, ElMessageBox } from 'element-plus';
 
@@ -229,7 +261,7 @@ const reviews = ref([
         rating: 5,
         userName: '张三',
         userIp: '192.168.1.101',
-        createTime: '2023-05-10 14:30:22',
+        createTime: '2025-03-10 14:30:22',
         images: [
             'https://via.placeholder.com/300x200?text=Review1-1',
             'https://via.placeholder.com/300x200?text=Review1-2'
@@ -240,7 +272,7 @@ const reviews = ref([
             objectName: '龙山村世外桃源风景区',
             hash: '0x8f5b785d732c5add0eba3c80fc37d20ebc7988a19c9b6180d59c3e2d7272fa21',
             blockNumber: 1256789,
-            timestamp: '2023-05-10 16:22:18',
+            timestamp: '2025-03-10 16:22:18',
             validator: '节点3',
             dataFingerprint: 'QmW2WQi7j6c7UgJTarActp7tDNikE4B2qXtFCfLPdsgG12'
         }
@@ -254,7 +286,7 @@ const reviews = ref([
         rating: 5,
         userName: '李四',
         userIp: '192.168.1.102',
-        createTime: '2023-05-12 09:45:11',
+        createTime: '2025-03-12 09:45:11',
         images: [
             'https://via.placeholder.com/300x200?text=Review2'
         ],
@@ -264,7 +296,7 @@ const reviews = ref([
             objectName: '青山绿茶',
             hash: '0x3c7b2c2150a48b5b9ff252f498ee08065287ed87f4947e9a3d9764d8873dd233',
             blockNumber: 1256793,
-            timestamp: '2023-05-12 10:15:33',
+            timestamp: '2025-03-12 10:15:33',
             validator: '节点1',
             dataFingerprint: 'QmT8CeWdN43qrthZnxaTmBHKqjmLnJgS8Bp9ZJFRQAGWgP'
         }
@@ -278,7 +310,7 @@ const reviews = ref([
         rating: 4,
         userName: '王五',
         userIp: '192.168.1.103',
-        createTime: '2023-05-15 16:20:35',
+        createTime: '2025-03-15 16:20:35',
         images: [],
         verified: false,
         certificationInfo: null
@@ -292,7 +324,7 @@ const reviews = ref([
         rating: 3,
         userName: '赵六',
         userIp: '192.168.1.104',
-        createTime: '2023-05-18 11:05:47',
+        createTime: '2025-03-18 11:05:47',
         images: [
             'https://via.placeholder.com/300x200?text=Review4-1',
             'https://via.placeholder.com/300x200?text=Review4-2',
@@ -310,7 +342,7 @@ const reviews = ref([
         rating: 5,
         userName: '钱七',
         userIp: '192.168.1.105',
-        createTime: '2023-05-20 14:35:18',
+        createTime: '2025-03-20 14:35:18',
         images: [],
         verified: true,
         certificationInfo: {
@@ -318,7 +350,7 @@ const reviews = ref([
             objectName: '民宿主题体验服务',
             hash: '0x1d8f88ae3bdf736c072a9b4dcda680f92a4f0612a4bed70c593f5adb8d5251af',
             blockNumber: 1256810,
-            timestamp: '2023-05-20 15:42:55',
+            timestamp: '2025-03-20 15:42:55',
             validator: '节点2',
             dataFingerprint: 'QmNLei78zWmzUdbeRB3CiUfAizWUrbeeZh5K1rhAQKCh51'
         }
@@ -332,7 +364,7 @@ const reviews = ref([
         rating: 4,
         userName: '孙八',
         userIp: '192.168.1.106',
-        createTime: '2023-05-22 09:15:47',
+        createTime: '2025-03-22 09:15:47',
         images: [
             'https://via.placeholder.com/300x200?text=Review6'
         ],
@@ -342,7 +374,7 @@ const reviews = ref([
             objectName: '梅山古村',
             hash: '0xe56c2f9e5d937cbb231925c7da5399b58f97ef09bca676d2e95770559c0a7764',
             blockNumber: 1256820,
-            timestamp: '2023-05-22 10:30:21',
+            timestamp: '2025-03-22 10:30:21',
             validator: '节点5',
             dataFingerprint: 'QmPK1s3pNYLi9ERiq3BDxKa4XosgWwFRQUydHUtz4YgpqB'
         }
@@ -650,6 +682,39 @@ const addReview = () => {
 
 const handleFileChange = (fileList) => {
     newReview.value.files = fileList;
+};
+
+// 导入外部评价的对话框状态
+const isImportReviewDialogVisible = ref(false);
+const importReview = reactive({
+    type: '',
+    link: '',
+    content: '',
+    rating: 0
+});
+
+// 打开导入外部评价对话框
+const openImportReviewDialog = () => {
+    isImportReviewDialogVisible.value = true;
+    // 重置表单
+    importReview.type = '';
+    importReview.link = '';
+    importReview.content = '';
+    importReview.rating = 0;
+};
+
+// 导入评价数据的逻辑
+const importReviewData = () => {
+    if (!importReview.link || !importReview.content) {
+        ElMessage.error('评价链接和内容不能为空');
+        return;
+    }
+
+    // 在这里添加逻辑将导入的评价记录保存到数据源
+    // 例如，调用 API 或更新本地状态
+
+    ElMessage.success('外部评价导入成功');
+    isImportReviewDialogVisible.value = false;
 };
 
 onMounted(() => {

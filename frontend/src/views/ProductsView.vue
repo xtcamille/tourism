@@ -205,11 +205,11 @@ const products = ref([
         description: '高山云雾出好茶，采用传统工艺精制而成，保留了茶叶的原始风味和营养成分。',
         image: 'https://via.placeholder.com/150?text=青山绿茶',
         verified: true,
-        certificationTime: '2023-05-15 14:22:36',
+        certificationTime: '2025-03-15 14:22:36',
         certificationInfo: {
             hash: '0x9f5b785d732c5add0eba3c80fc37d20ebc7988a19c9b6180d59c3e2d7272fa21',
             blockNumber: 1256789,
-            timestamp: '2023-05-15 14:22:36',
+            timestamp: '2025-03-15 14:22:36',
             validator: '节点3',
             dataFingerprint: 'QmW2WQi7j6c7UgJTarActp7tDNikE4B2qXtFCfLPdsgG12'
         }
@@ -224,11 +224,11 @@ const products = ref([
         description: '天然山区出产，无污染，富含不饱和脂肪酸和多种维生素，营养丰富。',
         image: 'https://via.placeholder.com/150?text=山核桃',
         verified: true,
-        certificationTime: '2023-05-16 09:35:21',
+        certificationTime: '2025-02-16 09:35:21',
         certificationInfo: {
             hash: '0x3c7b2c2150a48b5b9ff252f498ee08065287ed87f4947e9a3d9764d8873dd233',
             blockNumber: 1256805,
-            timestamp: '2023-05-16 09:35:21',
+            timestamp: '2025-02-16 09:35:21',
             validator: '节点1',
             dataFingerprint: 'QmT8CeWdN43qrthZnxaTmBHKqjmLnJgS8Bp9ZJFRQAGWgP'
         }
@@ -256,11 +256,11 @@ const products = ref([
         description: '原生态野生蜂蜜，营养丰富，口感纯正，无添加任何人工成分。',
         image: 'https://via.placeholder.com/150?text=野生蜂蜜',
         verified: true,
-        certificationTime: '2023-05-18 16:42:15',
+        certificationTime: '2025-03-18 16:42:15',
         certificationInfo: {
             hash: '0x1d8f88ae3bdf736c072a9b4dcda680f92a4f0612a4bed70c593f5adb8d5251af',
             blockNumber: 1256830,
-            timestamp: '2023-05-18 16:42:15',
+            timestamp: '2025-03-18 16:42:15',
             validator: '节点2',
             dataFingerprint: 'QmNLei78zWmzUdbeRB3CiUfAizWUrbeeZh5K1rhAQKCh51'
         }
@@ -288,11 +288,11 @@ const products = ref([
         description: '纯手工竹编，经久耐用，美观实用，可用于收纳或装饰。',
         image: 'https://via.placeholder.com/150?text=竹编篮子',
         verified: true,
-        certificationTime: '2023-05-20 11:18:47',
+        certificationTime: '2025-03-20 11:18:47',
         certificationInfo: {
             hash: '0xe56c2f9e5d937cbb231925c7da5399b58f97ef09bca676d2e95770559c0a7764',
             blockNumber: 1256842,
-            timestamp: '2023-05-20 11:18:47',
+            timestamp: '2025-03-20 11:18:47',
             validator: '节点5',
             dataFingerprint: 'QmPK1s3pNYLi9ERiq3BDxKa4XosgWwFRQUydHUtz4YgpqB'
         }

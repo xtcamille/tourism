@@ -242,7 +242,7 @@ const nodesList = ref([
         memoryUsage: 45,
         diskUsage: 38,
         uptime: '7天15小时25分钟',
-        lastHeartbeat: '2023-05-26 14:25:36',
+        lastHeartbeat: '2025-03-26 14:25:36',
         os: 'Ubuntu 20.04',
         peerCount: 7,
         networkStats: {
@@ -263,7 +263,7 @@ const nodesList = ref([
         memoryUsage: 40,
         diskUsage: 42,
         uptime: '15天8小时12分钟',
-        lastHeartbeat: '2023-05-26 14:25:41',
+        lastHeartbeat: '2025-03-26 14:25:41',
         os: 'CentOS 8',
         peerCount: 6,
         networkStats: {
@@ -284,7 +284,7 @@ const nodesList = ref([
         memoryUsage: 60,
         diskUsage: 55,
         uptime: '5天20小时45分钟',
-        lastHeartbeat: '2023-05-26 14:25:33',
+        lastHeartbeat: '2025-03-26 14:25:33',
         os: 'Ubuntu 22.04',
         peerCount: 7,
         networkStats: {
@@ -305,7 +305,7 @@ const nodesList = ref([
         memoryUsage: 35,
         diskUsage: 30,
         uptime: '3天11小时20分钟',
-        lastHeartbeat: '2023-05-26 14:25:22',
+        lastHeartbeat: '2025-03-26 14:25:22',
         os: 'Debian 11',
         peerCount: 5,
         networkStats: {
@@ -326,7 +326,7 @@ const nodesList = ref([
         memoryUsage: 50,
         diskUsage: 48,
         uptime: '10天5小时15分钟',
-        lastHeartbeat: '2023-05-26 14:25:28',
+        lastHeartbeat: '2025-03-26 14:25:28',
         os: 'CentOS 7',
         peerCount: 7,
         networkStats: {
@@ -347,7 +347,7 @@ const nodesList = ref([
         memoryUsage: 42,
         diskUsage: 37,
         uptime: '8天18小时30分钟',
-        lastHeartbeat: '2023-05-26 14:25:37',
+        lastHeartbeat: '2025-03-26 14:25:37',
         os: 'Ubuntu 20.04',
         peerCount: 6,
         networkStats: {
@@ -368,7 +368,7 @@ const nodesList = ref([
         memoryUsage: 0,
         diskUsage: 35,
         uptime: '-',
-        lastHeartbeat: '2023-05-26 10:15:42',
+        lastHeartbeat: '2025-03-26 10:15:42',
         os: 'Debian 10',
         peerCount: 0,
         networkStats: {
@@ -389,7 +389,7 @@ const nodesList = ref([
         memoryUsage: 68,
         diskUsage: 45,
         uptime: '1小时20分钟',
-        lastHeartbeat: '2023-05-26 14:25:39',
+        lastHeartbeat: '2025-03-26 14:25:39',
         os: 'Ubuntu 20.04',
         peerCount: 5,
         networkStats: {

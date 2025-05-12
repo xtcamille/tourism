@@ -239,19 +239,19 @@ const showImagePreview = (index) => {
 const reviews = reactive([
   {
     user: '张先生',
-    date: '2023-06-15',
+    date: '2025-02-15',
     rating: 5,
     content: '景色非常美丽，服务也很好，强烈推荐来这里游览。我和家人度过了愉快的一天。'
   },
   {
     user: '李女士',
-    date: '2023-05-22',
+    date: '2025-03-22',
     rating: 4,
     content: '整体体验很好，就是人有点多。建议早点去避开人流高峰。'
   },
   {
     user: '王先生',
-    date: '2023-04-30',
+    date: '2025-02-30',
     rating: 5,
     content: '这是我来过的最美的地方之一，拍照效果很好，导游讲解也很详细。'
   }

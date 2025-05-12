@@ -56,3 +56,6 @@ npm run dev
 ## API文档
 - 后端API默认运行在 http://localhost:8080 
 - 前端开发服务器默认运行在 http://localhost:5173
+
+## 问题
+- 登录时若是出现403错误，检查main.go文件中AllowOrigins配置：[]string{"http://127.0.0.1:5173"}
